@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
+@CrossOrigin
 public class MessageController {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
@@ -24,7 +25,7 @@ public class MessageController {
 
     @MessageMapping("/chat/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
-        logger.debug("Handling send message: " + message + " to: " + to);
+        logger.info("Handling send message: " + message + " to: " + to);
         boolean isExist = UserStorage.getInstance().getUsers().contains(to);
         if (isExist) {
             simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);

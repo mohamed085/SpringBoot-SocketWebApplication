@@ -238,3 +238,8 @@ ul {
     clear: both;
     height: 0;
 }
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}

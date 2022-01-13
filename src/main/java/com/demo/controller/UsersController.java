@@ -4,6 +4,7 @@ import com.demo.storage.UserStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 public class UsersController {
 
 
@@ -18,7 +20,8 @@ public class UsersController {
 
     @GetMapping("/registration/{username}")
     public ResponseEntity<Void> register(@PathVariable String username) {
-        logger.debug("Handling register user request: " + username);
+        logger.info("Handling register user request: " + username);
+
         try {
             UserStorage.getInstance().setUser(username);
         } catch (Exception e) {
